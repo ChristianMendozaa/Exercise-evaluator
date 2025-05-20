@@ -177,7 +177,14 @@ export function PoseDetection({
                 }))
                 const hunch = calculateAngle(ear, s, hip)
 
-                const valid = minA < 60 && maxA > 150 && elbowMov < 0.02 && backA > 170 && shm < 0.03 && hunch > 160
+                const valid =
+                  minA >= 35 &&
+                  maxA <= 180 &&
+                  elbowMov <= 0.55 &&
+                  backA >= 145 && backA <= 156 &&
+                  shm <= 0.07 &&
+                  hunch >= 145 && hunch <= 156;
+
 
                 poseData = {
                   repetition: countRef.current,

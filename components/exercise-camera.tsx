@@ -142,18 +142,66 @@ export function ExerciseCamera({
 
     const absolute = (currentSet - 1) * reps + currentRep
     if (g > absolute) {
+      console.log("🔍 Debug de repetición inválida:", {
+        minAngle: data.minAngle,
+        maxAngle: data.maxAngle,
+        elbowMovement: data.elbowMovement,
+        backAngle: data.backAngle,
+        shoulderMovement: data.shoulderMovement,
+        hunching: data.hunching,
+      })
+
       if (!data.isValid) {
         let m = "Mejora tu técnica: "
-        if ((data.minAngle ?? 0) >= 60) m += "Flexiona más. "
-        if ((data.maxAngle ?? 0) <= 150) m += "Extiende más. "
-        if ((data.elbowMovement ?? 0) >= 0.02) m += "Codo estable. "
-        if ((data.backAngle ?? 0) <= 170) m += "Sin inclinar atrás. "
-        if ((data.shoulderMovement ?? 0) >= 0.03) m += "Hombro quieto. "
-        if ((data.hunching ?? 0) <= 160) m += "Espalda recta. "
+        let issues = 0
+
+        console.log("🔍 Debug de repetición inválida:", {
+          minAngle: data.minAngle,
+          maxAngle: data.maxAngle,
+          elbowMovement: data.elbowMovement,
+          backAngle: data.backAngle,
+          shoulderMovement: data.shoulderMovement,
+          hunching: data.hunching,
+        })
+
+        if (typeof data.minAngle === "number" && data.minAngle < 35 && issues < 2) {
+          m += "Flexiona más al inicio. "
+          issues++
+        }
+
+        if (typeof data.maxAngle === "number" && data.maxAngle > 180 && issues < 2) {
+          m += "Evita sobreextender el brazo. "
+          issues++
+        }
+
+        if (typeof data.elbowMovement === "number" && data.elbowMovement > 0.55 && issues < 2) {
+          m += "Mantén el codo más estable. "
+          issues++
+        }
+
+        if (typeof data.backAngle === "number" && (data.backAngle < 145 || data.backAngle > 156) && issues < 2) {
+          m += "Evita inclinar el torso hacia atrás. "
+          issues++
+        }
+
+        if (typeof data.shoulderMovement === "number" && data.shoulderMovement > 0.07 && issues < 2) {
+          m += "Evita impulso con el hombro. "
+          issues++
+        }
+
+        if (typeof data.hunching === "number" && (data.hunching < 145 || data.hunching > 156) && issues < 2) {
+          m += "Corrige la postura de la espalda. "
+          issues++
+        }
+
+        console.warn("⚠️ Feedback:", m)
         setFeedback(m)
-      } else {
+      }
+
+      else {
         setFeedback("¡Excelente repetición! ✅")
       }
+
       setTimeout(() => setFeedback(null), 3000)
     }
   }

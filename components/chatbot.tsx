@@ -73,8 +73,8 @@ export const Chatbot = forwardRef<ChatbotHandle, ChatbotProps>(
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt, data: summaryJson, max_tokens: 200 })
           })
-          const data = await response.json()
-          setMessages(msgs => [...msgs, { id: Date.now(), text: data.result, isUser: false }])
+          //const data = await response.json()
+          //setMessages(msgs => [...msgs, { id: Date.now(), text: data.result, isUser: false }])
           //speakText(data.result)
         } catch (err) {
           const errMsg = "Hubo un error al obtener feedback del modelo GPT."
