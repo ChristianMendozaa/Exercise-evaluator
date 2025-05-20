@@ -135,10 +135,9 @@ export function ExerciseCamera({
     if (g % reps === 0) {
       const idx = g / reps - 1
       const slice = allRepsRef.current.slice(idx * reps, idx * reps + reps)
-      chatbotRef.current?.addBotMessage(
-        `📊 Serie ${idx + 1} completada: ${exercise.name}\n` +
-          JSON.stringify(slice, null, 2)
-      )
+
+      // Enviar los datos al chatbot para que use GPT
+      chatbotRef.current?.sendExerciseSummary(slice)
     }
 
     const absolute = (currentSet - 1) * reps + currentRep

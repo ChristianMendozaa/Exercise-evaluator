@@ -237,11 +237,6 @@ export function PoseDetection({
                     armsRaised,
                     legsOpened,
                     legDistance: distLegs.toFixed(3),
-                    hipWidth: hipW.toFixed(3),
-                    postureAngle: posture.toFixed(1),
-                    leftWristY: lwY.toFixed(3),
-                    leftEyeY: leY.toFixed(3),
-                    rightEyeY: reY.toFixed(3),
                   }
                 }
                 jjValidRef.current = false
